@@ -32,6 +32,7 @@ Create a HTML file to implement form based input and output.
 Publish the website in the given URL.
 
 ## PROGRAM :
+...
 
 <!DOCTYPE html>
 <html lang="en">
@@ -95,6 +96,7 @@ urlpatterns = [
     path('', views.EnergyCalc, name="EnergyCalc"),
     ]
 
+...
 
 ## SERVER SIDE PROCESSING:
 ![Screenshot 2024-12-11 110747](https://github.com/user-attachments/assets/dc150536-a8b4-490f-aa7b-46697e7e72d4)
