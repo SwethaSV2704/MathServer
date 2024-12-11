@@ -32,13 +32,112 @@ Create a HTML file to implement form based input and output.
 Publish the website in the given URL.
 
 ## PROGRAM :
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Javascript</title>
+<style>
+input{
+border-radius: 10px;
+padding: 10px;
+margin-top: 10px;
+margin-right:5px ;
+}
+body{
+margin-top: 15%;
+}
+h1{
+color:rgb(238, 83, 83);
+font-size: 40pz;
+}
+form{
+background-color: lightskyblue;
+width: 450px; ;
+}
+</style>
+<script>
+function pow(){
+var x=document.getElementById("a").value
+var y=document.getElementById("b").value
+document.getElementById('r').innerText="power:" +x*x*y
+}
+</script>
+</head>
+<body >
+    <H2>
+    <br>
+    <center>
+    <form >
+    <h1>POWER CALCULATOR </h1>
+    <input type="text" placeholder="Enter intensity" id="a">
+    <br>
+    <input type="text" placeholder="Enter resistance" id="b">
+    <br>
+    <input type="button" value="calculate" onclick="pow()"><br>
+    <label id="r"></label>
+    </form>
+    </center>
+    </H2>
+    </body>
+    </html>
+
+views.py
+
+from django.shortcuts import render
+def EnergyCalc(request):
+    context = {
+        'power': "0", 
+        'intensity': "0", 
+        'resistance': "0"
+    }
+    
+    if request.method == 'POST':
+        print("POST method is used")
+        
+        intensity = request.POST.get('intensity', '0')
+        resistance = request.POST.get('resistance', '0')
+        
+        print('Request:', request)
+        print('Intensity:', intensity)
+        print('Resistance:', resistance)
+        
+        try:
+            intensity = float(intensity)  
+            resistance = float(resistance) 
+            power = (intensity ** 2) * resistance
+            
+           
+            context['power'] = round(power, 2) 
+            context['intensity'] = round(intensity, 2)
+            context['resistance'] = round(resistance, 2)
+            
+            print(f'Calculated Power: {power}')
+        except ValueError as e:
+            
+            print(f'Error in calculation: {e}')
+            context['power'] = "Invalid input. Please enter valid numbers."
+    return render(request, 'mathapp/math.html', context)
+
+ urls.py
+
+ from django.contrib import admin
+from django.urls import path
+from mathapp import views
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.EnergyCalc, name="EnergyCalc"),
+    ]
 
 
 ## SERVER SIDE PROCESSING:
+![Screenshot 2024-12-11 110747](https://github.com/user-attachments/assets/dc150536-a8b4-490f-aa7b-46697e7e72d4)
 
 
 ## HOMEPAGE:
 
+![Screenshot (25)](https://github.com/user-attachments/assets/03588aca-9789-4b65-99d7-c658afeaaaef)
 
 ## RESULT:
 The program for performing server side processing is completed successfully.
